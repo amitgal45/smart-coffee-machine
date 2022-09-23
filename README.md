@@ -13,7 +13,7 @@ The idea behind the project is to handle coffee orders and manage it.
 ### Server Side
 Open the Project and follow the next commands:
 ````
-cd aidock-backend // enters the client folder
+cd server-side // enters the client folder
 yarn // install packages
 docker compose up --d --build  // to start all the containers
 ````
@@ -25,7 +25,7 @@ The Server runs on PORT 4000
 ### Client Side
 Open the Project and follow the next commands:
 ````
-cd aidock-client // enters the client folder
+cd client-side // enters the client folder
 yarn // install packages
 yarn start:dev //to start the app
 ````
