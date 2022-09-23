@@ -1,0 +1,67 @@
+version: '3'
+services:
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      # Only will build development stage from our dockerfile
+      target: development
+    volumes:
+      - .:/usr/src/app
+
+    env_file:
+      - .env
+    depends_on:
+      - redis
+      - mysql
+    # Run a command against the development stage of the image
+    command: yarn start:dev
+    ports:
+      - 4000:4000
+  redis:
+    container_name: redis
+    hostname: redis
+    image: bitnami/redis:latest
+    environment:
+          - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+    - "6379:6379"
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+    - "8081:8081"
+
+  mysql:
+    image: docker.io/bitnami/mysql:latest
+    ports:
+      - '3306:3306'
+    volumes:
+      - 'mysql_data:/bitnami/mysql/data'
+    environment:
+      - MYSQL_USER= aidock
+      - MYSQL_PASSWORD=aidock
+      - MYSQL_DATABASE=aidock
+      - MYSQL_ROOT_PASSWORD= aidock
+    healthcheck:
+      test: ['CMD', '/opt/bitnami/scripts/mysql/healthcheck.sh']
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  mysql_data:
+    driver: local
+
