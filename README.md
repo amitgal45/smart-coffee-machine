@@ -13,7 +13,7 @@ The idea behind the project is to handle coffee orders and manage it.
 ### Server Side
 Open the Project and follow the next commands:
 ````
-cd server-side // enters the client folder
+cd server-side // enters the server side folder
 yarn // install packages
 docker compose up --d --build  // to start all the containers
 ````
@@ -27,7 +27,7 @@ Open the Project and follow the next commands:
 ````
 cd client-side // enters the client folder
 yarn // install packages
-yarn start:dev //to start the app
+yarn start //to start the app
 ````
 The Client Runs On Port 3000
 ##
